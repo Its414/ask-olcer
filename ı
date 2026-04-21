@@ -1,0 +1,41 @@
+remove('visible');
+      const resultView = document.getElementById('resultView');
+      resultView.classList.add('visible');
+
+      // Animate number
+      let current = 0;
+      const target = skor;
+      const step = () => {
+        current = Math.min(current + Math.ceil((target - current) / 6) + 1, target);
+        document.getElementById('scoreNum').textContent = current;
+        if (current < target) requestAnimationFrame(step);
+      };
+      requestAnimationFrame(step);
+
+      // Color the circle by score
+      const circle = document.querySelector('.score-circle');
+      if (skor > 80) circle.style.borderColor = '#c0392b';
+      else if (skor > 50) circle.style.borderColor = '#e67e22';
+      else if (skor > 20) circle.style.borderColor = '#7f8c8d';
+      else circle.style.borderColor = '#2c3e50';
+
+    }, 2000);
+  }
+
+  function resetForm() {
+    document.getElementById('resultView').classList.remove('visible');
+    document.getElementById('isim1').value = '';
+    document.getElementById('isim2').value = '';
+    document.getElementById('scoreNum').textContent = '0';
+    document.querySelector('.score-circle').style.borderColor = 'var(--dark)';
+    document.getElementById('formView').style.display = 'block';
+  }
+
+  // Enter key support
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && document.getElementById('formView').style.display !== 'none') hesapla();
+  });
+</script>
+
+</body>
+</html>
